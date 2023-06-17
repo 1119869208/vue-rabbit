@@ -7,7 +7,7 @@ const HomeNewList = ref([])
 
 const getHomeNew = async () => {
   const { result } = await getHomeNewApi()
-  console.log(result)
+  // console.log(result)
   HomeNewList.value = result
 }
 
