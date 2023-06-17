@@ -15,7 +15,7 @@ const CategoryStore = useCategoryStore()
           <RouterLink to="/">首页</RouterLink>
         </li>
         <li class="home" v-for="item in CategoryStore.cateGory" :key="item.id">
-          <RouterLink :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${item.id}`">{{ item.name }}</RouterLink>
         </li>
       </ul>
       <div class="search">
@@ -23,6 +23,7 @@ const CategoryStore = useCategoryStore()
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
+
 
     </div>
   </header>
