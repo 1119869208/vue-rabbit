@@ -14,7 +14,7 @@ const router = createRouter({
     children: [
     // 二级路由
     {path: '', component: Home},
-    {path: 'category', component: Category}
+    {path: 'category/:id', component: Category}
    ]
   },
 
