@@ -2,6 +2,7 @@
 import { getDetail } from '@/apis/detail'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import DetailHotVue from './components/DetailHot.vue'
 const route = useRoute()
 
 const goods = ref({})
@@ -117,7 +118,8 @@ onMounted(() => getDetailList())
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+              <DetailHotVue></DetailHotVue>
+              <DetailHotVue></DetailHotVue>
             </div>
           </div>
         </div>
