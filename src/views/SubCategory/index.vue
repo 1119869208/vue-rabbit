@@ -39,6 +39,20 @@ const getNewGoodsList = () => {
   getSubGoods()
 }
 
+// 加载功能实现
+const disabled = ref(false)
+const load = async () => {
+  // console.log('监听了加载事件')
+  reqData.value.page++
+  const { result } = await getSubCategoryAPI(reqData.value)
+  goodsLists.value = [...goodsLists.value, ...result.items]
+
+  // 加载事件禁用 （加载完毕）
+  if (result.items.length === 0) {
+    disabled.value = true
+  }
+}
+
 </script>
 
 <template>
@@ -58,7 +72,7 @@ const getNewGoodsList = () => {
         <el-tab-pane label="最高人气" name="orderNum"></el-tab-pane>
         <el-tab-pane label="评论最多" name="evaluateNum"></el-tab-pane>
       </el-tabs>
-      <div class="body">
+      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
         <!-- 商品列表-->
         <goodsList v-for="goods in goodsLists" :goods="goods" :key="goods.id" />
       </div>
