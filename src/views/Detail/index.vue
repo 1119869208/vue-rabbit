@@ -118,8 +118,10 @@ onMounted(() => getDetailList())
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-              <DetailHotVue></DetailHotVue>
-              <DetailHotVue></DetailHotVue>
+              <!-- 24小时热榜 -->
+              <DetailHotVue :hotType="1"></DetailHotVue>
+              <!-- 周热榜 -->
+              <DetailHotVue :hotType="2"></DetailHotVue>
             </div>
           </div>
         </div>
