@@ -10,6 +10,7 @@ const props = defineProps({
   }
 })
 
+// 配置title 1、24小时热榜 2、周热榜
 const TypeList = {
   1: '24小时热榜',
   2: '周热榜'
@@ -45,23 +46,24 @@ onMounted(() => getGoodsHot())
   </div>
 </template>
 
-
 <style scoped lang="scss">
 .goods-hot {
+  background-color: #fff;
+
   h3 {
     height: 70px;
     background: $helpColor;
     color: #fff;
     font-size: 18px;
     line-height: 70px;
-    padding-left: 25px;
+    // padding-left: 25px;
     margin-bottom: 10px;
     font-weight: normal;
   }
 
   .goods-item {
     display: block;
-    padding: 20px 30px;
+    margin: 20px 30px;
     text-align: center;
     background: #fff;
 
