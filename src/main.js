@@ -9,6 +9,9 @@ import '@/styles/common.scss'
 // 导入懒加载插件
 import { LazyPlus } from '@/directives/index.js'
 
+// 导入需要全局注册的Components组件
+import { componentPlugin } from '@/components/index.js'
+
 // import { getCategoryAPI } from './apis/text'
 
 // getCategoryAPI().then(res=>{
@@ -20,6 +23,7 @@ const app = createApp(App)
 app.use(createPinia())
 app.use(router)
 app.use(LazyPlus)
+app.use(componentPlugin)
 
 app.mount('#app')
 
