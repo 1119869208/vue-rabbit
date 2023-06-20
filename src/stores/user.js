@@ -22,7 +22,7 @@ export const useUserStore = defineStore('user', () => {
   return {
     userInfo,
     getUserInfo,
-    clearUserInfo
+    clearUserInfo,
   }
 },
   {
