@@ -27,6 +27,15 @@ export const useCartStore = defineStore('cart', () => {
     cartList.value = idx
   }
 
+  // 单选功能实现
+  const singleCheck = (skuId, selected) => {
+    //  通过skyID找到要修改的那一项，然后把它selected修改为传过来的selected
+    const item = cartList.value.find(item => item.skuId === skuId)
+    item.selected = selected
+  }
+
+
+
   // 计算属性
   // 计算求商品数量
   const allCount = computed(() => cartList.value.reduce((amt, item) => amt + item.count, 0))
@@ -39,7 +48,8 @@ export const useCartStore = defineStore('cart', () => {
     addCart,
     delCartList,
     allCount,
-    allPrice
+    allPrice,
+    singleCheck
   }
 },
   {
