@@ -3,12 +3,13 @@ import { ref } from "vue";
 import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 import { useRouter } from 'vue-router'
-import { loginAPI } from '@/apis/users.js'
+// pinia数据导入
+import { useUserStore } from '@/stores/user'
 
 // 表单校验规则
 const from = ref({
-  account: '',
-  password: '',
+  account: 'xiaotuxian001',
+  password: '123456',
   agree: true
 })
 
@@ -37,6 +38,10 @@ const rules = {
 // 点击登录按钮进行优化操作 用户没有输入账号密码 不能进行点击登录按钮 会提示
 const fromRef = ref(null)
 const router = useRouter()
+
+// 导入声明pinia方法
+const UserStore = useUserStore()
+
 const doLogin = () => {
   const { account, password } = from.value
   // 调用实例方法
@@ -45,8 +50,8 @@ const doLogin = () => {
     // valid 所有表单通过校验了，才为true 以valid为判断 如果通过执行登录逻辑
     if (valid) {
       // 逻辑
-      const res = await loginAPI({ account, password })
-      console.log(res)
+      // console.log(res)
+      await UserStore.getUserInfo({ account, password })
       ElMessage({
         type: 'success',
         message: '登录成功'

@@ -8,7 +8,7 @@ const goodsProduct = ref([])
 
 const getProduct = async () => {
   const { result } = await getProductApi()
-  console.log(result)
+  // console.log(result)
   goodsProduct.value = result
 }
 
