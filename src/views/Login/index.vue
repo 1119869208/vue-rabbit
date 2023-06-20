@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
+import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router'
 // pinia数据导入
 import { useUserStore } from '@/stores/user'
