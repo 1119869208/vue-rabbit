@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 export const useCartStore = defineStore('cart', () => {
   // 1、定义购物车数据列表
   const cartList = ref([])
@@ -22,15 +22,24 @@ export const useCartStore = defineStore('cart', () => {
     // 思路 1、找到要删除的数组下标号 通过splice下标值删除产品
     // const idx = cartList.value.findIndex((item) => skuId === item.skuId)
     // cartList.value.splice(idx, 1)
-    // 思路 2、使用数组的过滤方法实现 
+    // 思路 2、使用数组的过滤方法实现  核心思路是过滤不等于对应的skuId的值形成一个新数组
     const idx = cartList.value.filter(item => skuId !== item.skuId)
     cartList.value = idx
   }
 
+  // 计算属性
+  // 计算求商品数量
+  const allCount = computed(() => cartList.value.reduce((amt, item) => amt + item.count, 0))
+  const allPrice = computed(() => cartList.value.reduce((amt, item) => amt + item.count * item.price, 0))
+
+  // 计算求商品总价
+
   return {
     cartList,
     addCart,
-    delCartList
+    delCartList,
+    allCount,
+    allPrice
   }
 },
   {
