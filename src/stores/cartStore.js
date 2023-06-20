@@ -34,6 +34,14 @@ export const useCartStore = defineStore('cart', () => {
     item.selected = selected
   }
 
+  // 全选功能
+  // 单选功能都为true 全选为选中状态
+  const isAll = computed(() => cartList.value.every((item) => item.selected)
+  )
+
+  // 全选功能点击 小复选框都为选中状态
+  const allCheck = (selected) => { cartList.value.forEach((item) => item.selected = selected) }
+
 
 
   // 计算属性
@@ -49,7 +57,9 @@ export const useCartStore = defineStore('cart', () => {
     delCartList,
     allCount,
     allPrice,
-    singleCheck
+    singleCheck,
+    isAll,
+    allCheck
   }
 },
   {
