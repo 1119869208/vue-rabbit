@@ -12,6 +12,9 @@ const http = axios.create({
 
 // axios请求拦截器
 http.interceptors.request.use(config => {
+  // 为什么要拼接接口的健全呢
+  // 你需要告诉我你有token，我才能把数据提供给你，
+  // 因为有很多接口，所以需要在请求拦截器里去配置 一次配置，都可以生效 拼接 Beare + 空格 + token值
   const UserStore = useUserStore()
   const token = UserStore.userInfo.token
   if (token) {

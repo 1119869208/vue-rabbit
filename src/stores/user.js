@@ -12,10 +12,17 @@ export const useUserStore = defineStore('user', () => {
     const res = await loginAPI({ account, password })
     userInfo.value = res.result
   }
+
+  // 用户退出登录删除用户数据方法
+  const clearUserInfo = () => {
+    userInfo.value = {}
+  }
+
   // 3、以对象的形式把 action state ruturn出去
   return {
     userInfo,
-    getUserInfo
+    getUserInfo,
+    clearUserInfo
   }
 },
   {
