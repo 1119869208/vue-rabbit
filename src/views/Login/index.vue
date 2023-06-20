@@ -1,15 +1,19 @@
 <script setup>
 import { ref } from "vue";
+import 'element-plus/es/components/message/style/css'
+import { ElMessage } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { loginAPI } from '@/apis/users.js'
 
 // 表单校验规则
 const from = ref({
-  username: '',
+  account: '',
   password: '',
   agree: true
 })
 
 const rules = {
-  username: [
+  account: [
     { required: true, message: '用户名不能为空', trigger: 'blur' },
   ],
   password: [
@@ -30,21 +34,24 @@ const rules = {
   ]
 }
 
-// const agree = (rule, value, callback) => {
-//   if (!value) {
-//     callback(new Error('请勾选同意协议'))
-//   } else {
-//     callback()
-//   }
-// }
-
 // 点击登录按钮进行优化操作 用户没有输入账号密码 不能进行点击登录按钮 会提示
 const fromRef = ref(null)
+const router = useRouter()
 const doLogin = () => {
-  fromRef.value.validate((valid) => {
-    console.log(valid)
+  const { account, password } = from.value
+  // 调用实例方法
+  fromRef.value.validate(async (valid) => {
+    // console.log(valid)
+    // valid 所有表单通过校验了，才为true 以valid为判断 如果通过执行登录逻辑
     if (valid) {
       // 逻辑
+      const res = await loginAPI({ account, password })
+      console.log(res)
+      ElMessage({
+        type: 'success',
+        message: '登录成功'
+      })
+      router.replace({ path: '/' })
     }
   })
 }
@@ -77,8 +84,8 @@ const doLogin = () => {
 
             <!-- 表单标签 -->
             <el-form ref="fromRef" label-position="right" label-width="60px" status-icon :model="from" :rules="rules">
-              <el-form-item label="账户" prop="username">
-                <el-input v-model="from.username" />
+              <el-form-item label="账户" prop="account">
+                <el-input v-model="from.account" />
               </el-form-item>
               <el-form-item label="密码" prop="password">
                 <el-input v-model="from.password" />

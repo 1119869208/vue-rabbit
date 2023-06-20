@@ -1,4 +1,7 @@
 import axios from "axios"
+import 'element-plus/es/components/message/style/css'
+import { ElMessage } from 'element-plus'
+
 
 // axios 基础的封装
 const http = axios.create({
@@ -13,7 +16,10 @@ http.interceptors.request.use(config => {
 
 // axios响应式拦截器
 http.interceptors.response.use(res => res.data, e => {
+  // 统一错误提示
+  ElMessage({ type: 'warning', message: e.response.data.message })
   return Promise.reject(e)
+
 })
 
 export default http
