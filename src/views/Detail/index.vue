@@ -39,7 +39,7 @@ const addCart = () => {
       // 传递的参数
       id: goods.value.id,  //商品id
       name: goods.value.name,  //商品名称
-      pictures: goods.value.mainPictures[0], //图片
+      picture: goods.value.mainPictures[0], //图片
       price: goods.value.price,  //最新价格
       count: count.value,  //商品数量
       skuId: skuObj.skuId, //sku的ID
