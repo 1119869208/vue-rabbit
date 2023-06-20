@@ -2,6 +2,7 @@ import axios from "axios"
 import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
 import { useUserStore } from '@/stores/user.js'
+import router from '@/router'
 
 
 // axios 基础的封装
@@ -27,7 +28,19 @@ http.interceptors.request.use(config => {
 http.interceptors.response.use(res => res.data, e => {
   // 统一错误提示
   ElMessage({ type: 'warning', message: e.response.data.message })
+
+  // 报错401token失效 token失效不能在请求数据了 所以要实现下面功能
+  const UserStore = useUserStore()
+
+  if (e.response.status === 401) {
+    // 1、清除本地数据
+    UserStore.clearUserInfo()
+    // 2、跳转到登录页
+    router.push('/login')
+  }
+
   return Promise.reject(e)
+
 
 })
 
