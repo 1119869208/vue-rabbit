@@ -38,6 +38,17 @@ const rules = {
 //   }
 // }
 
+// 点击登录按钮进行优化操作 用户没有输入账号密码 不能进行点击登录按钮 会提示
+const fromRef = ref(null)
+const doLogin = () => {
+  fromRef.value.validate((valid) => {
+    console.log(valid)
+    if (valid) {
+      // 逻辑
+    }
+  })
+}
+
 </script>
 
 
@@ -65,7 +76,7 @@ const rules = {
 
 
             <!-- 表单标签 -->
-            <el-form label-position="right" label-width="60px" status-icon :model="from" :rules="rules">
+            <el-form ref="fromRef" label-position="right" label-width="60px" status-icon :model="from" :rules="rules">
               <el-form-item label="账户" prop="username">
                 <el-input v-model="from.username" />
               </el-form-item>
@@ -77,7 +88,7 @@ const rules = {
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="doLogin">点击登录</el-button>
             </el-form>
           </div>
         </div>
