@@ -21,7 +21,6 @@ export const findNewCartAPI = () => {
 
 
 // 删除购物车列表
-
 export const eleCartAPI = (ids) => {
   return http({
     url: '/member/cart',
@@ -29,5 +28,15 @@ export const eleCartAPI = (ids) => {
     data: {
       ids
     }
+  })
+}
+
+
+// 未登录时添加商品合并购物车列表
+export const memberCartApi = (data) => {
+  return http({
+    url: '/member/cart/merge',
+    method: 'POST',
+    data
   })
 }
