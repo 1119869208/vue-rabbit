@@ -1,6 +1,11 @@
 <script setup>
 import { checkOutAPI } from '@/apis/Checkout'
 import { onMounted, ref } from "vue"
+import { payOutAPI } from '@/apis//Checkout.js'
+import { useRouter } from 'vue-router'
+import { useCartStore } from '@/stores/cartStore'
+const router = useRouter()
+const cartStore = useCartStore()
 
 const checkInfo = ref({})  // 订单对象
 const curAddress = ref({})  // 地址对象
@@ -32,6 +37,31 @@ const config = () => {
   curAddress.value = cityAddress.value
   showDialog.value = false
   cityAddress.value = {}
+}
+
+// 提交订单功能实现
+const postPayChange = async () => {
+  const { result } = await payOutAPI({
+    deliveryTimeType: 1,
+    payType: 1,
+    payChannel: 1,
+    buyerMessage: '',
+    goods: checkInfo.value.goods.map(item => {
+      return {
+        skuId: item.skuId,
+        count: item.count
+      }
+    }),
+    addressId: curAddress.value.id
+  })
+  const orderId = result.id
+  router.push({
+    path: '/pay',
+    query: {
+      id: orderId
+    }
+  })
+  cartStore.updataNewList()
 }
 
 
@@ -129,7 +159,7 @@ const config = () => {
         </div>
         <!-- 提交订单 -->
         <div class="submit">
-          <el-button type="primary" size="large">提交订单</el-button>
+          <el-button type="primary" size="large" @click="postPayChange">提交订单</el-button>
         </div>
       </div>
     </div>
