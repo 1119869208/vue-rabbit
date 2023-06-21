@@ -1,21 +1,45 @@
 import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { useUserStore } from './user'
+import { insertCartAPI, findNewCartAPI } from '@/apis/cart.js'
+
+
 export const useCartStore = defineStore('cart', () => {
+  // 获取userstore里面的token值
+  const userStore = useUserStore()
+  // 提取里面的token值 用来做判断里面是否有token值
+  const isLogin = computed(() => userStore.userInfo.token)
+
   // 1、定义购物车数据列表
   const cartList = ref([])
+
   // 2、添加购物车方法
-  const addCart = (goods) => {
-    // 添加购物车操作
-    // console.log(cartList.value);
-    // item为商品ID
-    const item = cartList.value.find((item) => goods.skuId === item.skuId)
-    if (item) {
-      // 如果能找到对应的商品规格ID
-      item.count += 1
+  const addCart = async (goods) => {
+    const { skuId, count } = goods
+    if (isLogin.value) {
+      // 登录之后加入购物车的逻辑
+      // 加入购物车逻辑
+      await insertCartAPI({ skuId, count })
+      // 获取最新购物车列表逻辑
+      const { result } = await findNewCartAPI()
+      // 覆盖本地购物车列表
+      cartList.value = result
     } else {
-      cartList.value.push(goods)
+      // 添加购物车操作
+      // console.log(cartList.value);
+      // item为商品ID
+      const item = cartList.value.find((item) => goods.skuId === item.skuId)
+      if (item) {
+        // 如果能找到对应的商品规格ID
+        item.count += 1
+      } else {
+        cartList.value.push(goods)
+      }
     }
+
+
   }
+
 
   // 删除业务 删除购物车产品功能
   const delCartList = (skuId) => {
@@ -26,6 +50,8 @@ export const useCartStore = defineStore('cart', () => {
     const idx = cartList.value.filter(item => skuId !== item.skuId)
     cartList.value = idx
   }
+
+
 
   // 单选功能实现
   const singleCheck = (skuId, selected) => {
