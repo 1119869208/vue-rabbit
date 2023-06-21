@@ -9,6 +9,7 @@ import Detail from '@/views/Detail/index.vue'
 import CartList from '@/views/CartList/index.vue'
 import Chenkout from '@/views/Chenkout/index.vue'
 import Pay from '@/views/Pay/index.vue'
+import PayBack from '@/views/Pay/PayBack.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +25,8 @@ const router = createRouter({
         { path: 'detail/:id', component: Detail },
         { path: 'cartlist', component: CartList },
         { path: 'chenkout', component: Chenkout },
-        { path: 'pay', component: Pay }
+        { path: 'pay', component: Pay },
+        { path: 'paycallback', component: PayBack }
       ]
     },
 

@@ -5,3 +5,10 @@ export const getOrderAPI = (id) => {
     url: `/member/order/${id}`,
   })
 }
+
+export const getAliPay = (id) => {
+  return http({
+    orderId: id,
+    redirect: ''
+  })
+}
