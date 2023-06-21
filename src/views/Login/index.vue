@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 import 'element-plus/theme-chalk/el-message.css'
 import { useRouter } from 'vue-router'
 // pinia数据导入
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 
 // 表单校验规则
 const from = ref({
@@ -350,4 +350,4 @@ const doLogin = () => {
   width: 100%;
   color: #fff;
 }
-</style>
+</style>@/stores/userStore

@@ -1,5 +1,5 @@
 <script setup>
-import { useCategoryStore } from '@/stores/category.js'
+import { useCategoryStore } from '@/stores/categoryStore.js'
 const CategoryStore = useCategoryStore()
 import HeaderCart from './HeaderCart.vue';
 
@@ -132,4 +132,4 @@ import HeaderCart from './HeaderCart.vue';
     }
   }
 }
-</style>
+</style>@/stores/categoryStore.js

@@ -5,7 +5,7 @@ import LayoutFooter from './components/LayoutFooter.vue'
 import LayoutFixed from './components/LayoutFixed.vue';
 
 // 获取导航列表的数据
-import { useCategoryStore } from '@/stores/category.js'
+import { useCategoryStore } from '@/stores/categoryStore.js'
 import { onMounted } from 'vue';
 
 const useCategory = useCategoryStore()
@@ -23,4 +23,4 @@ onMounted(() => {
   <!-- <router-view :key="$route.fullPath"></router-view> -->
   <router-view></router-view>
   <layout-footer></layout-footer>
-</template>
+</template>@/stores/categoryStore.js

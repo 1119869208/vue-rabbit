@@ -18,3 +18,16 @@ export const findNewCartAPI = () => {
     url: '/member/cart',
   })
 }
+
+
+// 删除购物车列表
+
+export const eleCartAPI = (ids) => {
+  return http({
+    url: '/member/cart',
+    method: 'DELETE',
+    data: {
+      ids
+    }
+  })
+}

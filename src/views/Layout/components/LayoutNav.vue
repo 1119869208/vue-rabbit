@@ -1,6 +1,6 @@
 <script setup>
 // 导入pinia用户数据
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '@/stores/userStore'
 import { useRouter } from 'vue-router'
 
 const UserStore = useUserStore()
@@ -75,4 +75,4 @@ const confirm = () => {
     }
   }
 }
-</style>
+</style>@/stores/userStore
