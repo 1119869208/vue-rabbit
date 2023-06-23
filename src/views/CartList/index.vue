@@ -12,6 +12,12 @@ const singleCheck = (i, selected) => {
 const allCheck = selected => {
   cartStore.allCheck(selected)
 }
+
+
+// 获取要删除对应产品的id
+const deleteChange = (skuId) => {
+  cartStore.delCartList(skuId)
+}
 </script>
 
 <template>
@@ -60,7 +66,8 @@ const allCheck = selected => {
               </td>
               <td class="tc">
                 <p>
-                  <el-popconfirm title="确认删除吗?" confirm-button-text="确认" cancel-button-text="取消" @confirm="delCart(i)">
+                  <el-popconfirm title="确认删除吗?" confirm-button-text="确认" cancel-button-text="取消"
+                    @confirm="deleteChange(i.skuId)">
                     <template #reference>
                       <a href="javascript:;">删除</a>
                     </template>
