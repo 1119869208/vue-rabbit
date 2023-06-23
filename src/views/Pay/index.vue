@@ -1,6 +1,6 @@
 <script setup>
 import { getOrderAPI } from '@/apis/pay'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCountDown } from '@/composables/useCountDown.js'
 // 时间格式化
