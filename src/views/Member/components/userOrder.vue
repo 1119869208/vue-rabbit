@@ -4,22 +4,33 @@ import { onMounted, ref } from 'vue'
 
 // 订单列表
 const orderList = ref([])
+// 详情对应的多少条数据
+const orderData = ref(0)
 const params = ref({
-  orderState: 0,
-  page: 1,
-  pageSize: 2
+  orderState: 0, //tab下标
+  page: 1, //页数
+  pageSize: 2 //每页展示产品的数量
 })
 
 const getOrderList = async () => {
   const { result } = await getUserOrder(params.value)
   orderList.value = result.items
+  orderData.value = result.counts
 }
 
 onMounted(() => getOrderList())
 
 const tabChange = (type) => {
   // console.log(type);
-  params.value.orderState = type
+  params.value.orderState = type // tab栏下标号切换赋值
+  getOrderList()
+}
+
+// 分页
+const currentChange = (type) => {
+  // 拿掉切换第几页的数值
+  // console.log(type)
+  params.value.page = type
   getOrderList()
 }
 
@@ -115,7 +126,8 @@ const tabTypes = [
           </div>
           <!-- 分页 -->
           <div class="pagination-container">
-            <el-pagination background layout="prev, pager, next" />
+            <el-pagination :total="orderData" :page-size="params.pageSize" @current-change="currentChange" background
+              layout="prev, pager, next" />
           </div>
         </div>
       </div>
